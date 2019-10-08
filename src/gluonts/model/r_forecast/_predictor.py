@@ -84,7 +84,7 @@ class RForecastPredictor(RepresentablePredictor):
         try:
             from rpy2 import robjects, rinterface
             import rpy2.robjects.packages as rpackages
-            from rpy2.rinterface import RRuntimeError
+            from rpy2.rinterface_lib.embed import RRuntimeError
         except ImportError as e:
             raise ImportError(str(e) + USAGE_MESSAGE) from e
 
@@ -147,8 +147,8 @@ class RForecastPredictor(RepresentablePredictor):
         f = save_to_buf if save_info else dont_save
 
         # save output from the R console in buf
-        self._rinterface.set_writeconsole_regular(f)
-        self._rinterface.set_writeconsole_warnerror(f)
+#        self._rinterface.set_writeconsole_regular(f)
+#        self._rinterface.set_writeconsole_warnerror(f)
 
         make_ts = self._stats_pkg.ts
         r_params = self._robjects.vectors.ListVector(params)
@@ -162,12 +162,12 @@ class RForecastPredictor(RepresentablePredictor):
         # if "quantiles" in forecast_dict:
         #     forecast_dict["quantiles"] = dict(zip(params["quantiles"], forecast_dict["quantiles"]))
 
-        self._rinterface.set_writeconsole_regular(
-            self._rinterface.consolePrint
-        )
-        self._rinterface.set_writeconsole_warnerror(
-            self._rinterface.consolePrint
-        )
+#        self._rinterface.set_writeconsole_regular(
+#            self._rinterface.consolePrint
+#        )
+#        self._rinterface.set_writeconsole_warnerror(
+#            self._rinterface.consolePrint
+#        )
         return forecast_dict, buf
 
     def predict(
