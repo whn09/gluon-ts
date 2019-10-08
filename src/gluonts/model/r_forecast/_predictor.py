@@ -84,7 +84,7 @@ class RForecastPredictor(RepresentablePredictor):
         try:
             from rpy2 import robjects, rinterface
             import rpy2.robjects.packages as rpackages
-            from rpy2.rinterface_lib.embed import RRuntimeError
+            from rpy2.rinterface_lib.embedded import RRuntimeError
         except ImportError as e:
             raise ImportError(str(e) + USAGE_MESSAGE) from e
 
